@@ -1,10 +1,12 @@
 import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 export function createScene() {
     // initial scene setup
     const gameWindow = document.getElementById('render-target');
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x777777);
+    scene.add(new THREE.AxesHelper(4));
 
     const camera = new THREE.PerspectiveCamera(75, gameWindow.offsetWidth / gameWindow.offsetHeight,0.1, 1000);
     camera.position.z = 5;
@@ -18,14 +20,20 @@ export function createScene() {
     const mat = new THREE.MeshBasicMaterial({color: 0xFFFF00});
     const mesh = new THREE.Mesh(geo, mat);
 
+    //controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.maxPolarAngle = Math.PI / 2;
+    controls.maxDistance = 4;
+    controls.minDistance = 2;
+
     scene.add(mesh);
-    console.log(scene);
 
     // some functions
     function draw(){
-        mesh.rotation.x += 0.01;
-        mesh.rotation.y += 0.01;
-        mesh.rotation.z += 0.01;
+        // mesh.rotation.x += 0.01;
+        // mesh.rotation.y += 0.01;
+        // mesh.rotation.z += 0.01;
         renderer.render(scene, camera);
     }
 
