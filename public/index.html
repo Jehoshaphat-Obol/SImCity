@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
         }
       </script>
 </head>
+
 <body>
     <div id="root-window">
         <div id="render-target">
@@ -22,12 +24,19 @@
     </div>
 
     <script type="module">
-        import {createScene} from '../src/scene.js';
+        import { createScene } from '../src/scene.js';
+        import { createCity } from '../src/city.js';
 
         window.onload = () => {
-            window.scene = createScene();
+            const scene = createScene();
+            const city = createCity(8);
+
+            scene.initialize(city);
+
+            window.scene = scene;
             window.scene.start();
         }
     </script>
 </body>
+
 </html>

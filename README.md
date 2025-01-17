@@ -1,10 +1,10 @@
 # What's new?
-- added orbit controls to create an orbit camera
-- added axes helper
+- added grass
+- added lighting
 ---
 
 # What's changed?
-- improved importation statements
+
 ---
 
 # What's removed?
