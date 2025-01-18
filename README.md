@@ -1,10 +1,10 @@
 # What's new?
-- added grass
-- added lighting
+- added shadows
+- added self building generation
 ---
 
 # What's changed?
-
+- limited orbit controls
 ---
 
 # What's removed?
