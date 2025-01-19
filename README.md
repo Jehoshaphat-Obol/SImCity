@@ -1,9 +1,9 @@
 # What's new?
-- Asset factory
+-Selectable objects with mouse
 ---
 
 # What's changed?
-- scene update cycle is optimized
+
 ---
 
 # What's removed?

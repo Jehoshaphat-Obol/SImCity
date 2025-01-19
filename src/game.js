@@ -6,7 +6,9 @@ export function createGame() {
     const city = createCity(16);
 
     scene.initialize(city);
-
+    scene.onObjectSelected = (selectedObject) => {
+        console.log(selectedObject);
+    }
     window.scene = scene;
 
     const game = {
@@ -21,4 +23,6 @@ export function createGame() {
     }, 1000)
 
     scene.start();
+
+    window.addEventListener('mousedown',scene.onMouseDown.bind(scene));
 }

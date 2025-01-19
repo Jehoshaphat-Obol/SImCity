@@ -37,6 +37,12 @@ export function createScene() {
     let buildings = [];
 
 
+    // ray casting
+    let raycaster = new THREE.Raycaster();
+    let mouse = new THREE.Vector2();
+    let selectedObject = undefined;
+    let onObjectSelected = undefined;
+
     // some functions
     function initialize(city) {
         scene.clear();
@@ -70,7 +76,7 @@ export function createScene() {
                 }
 
                 // if the city data model is updated, update the mesh
-                if(newBuilding !== currentBuilding){
+                if(newBuilding && (newBuilding !== currentBuilding)){
                     let mesh = createAsset(newBuilding, x, y);
                     
                     scene.remove(buildings[x][y]);
@@ -114,10 +120,33 @@ export function createScene() {
         renderer.setAnimationLoop(null);
     }
 
+    function onMouseDown(event){
+        mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+        mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        
+        let intersects = raycaster.intersectObjects(scene.children, false);
+
+        if(intersects.length > 0){
+            selectedObject ? selectedObject.material.emissive.setHex(0) : null;
+
+            selectedObject = intersects[0].object;
+
+            selectedObject.material.emissive.setHex(0x555555);
+        
+            if(this.onObjectSelected){
+                this.onObjectSelected(selectedObject);
+            }
+        }
+    }
+
     return {
         start,
         stop,
         initialize,
         update,
+        onMouseDown,
+        onObjectSelected,
     }
 }

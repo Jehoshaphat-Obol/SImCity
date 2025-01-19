@@ -8,7 +8,7 @@ const assets = {
         mesh.position.set(x, -0.5, y);
         mesh.receiveShadow = true;
 
-        mesh.userData = {'id': 'grass'};
+        mesh.userData = {'id': 'grass', x, y};
         return mesh;
     },
     'building-1': (x, y) => {
@@ -19,7 +19,7 @@ const assets = {
         mesh.scale.set(1, height, 1);
         mesh.castShadow = true;
 
-        mesh.userData = {'id': 'building-1'};
+        mesh.userData = {'id': 'building-1', x, y};
         return mesh;
     },
     'building-2': (x, y) => {
@@ -30,7 +30,8 @@ const assets = {
         mesh.scale.set(1, height, 1);
         mesh.castShadow = true;
 
-        mesh.userData = {'id': 'building-2'};
+        mesh.userData = {'id': 'building-2', x, y};
+
         return mesh;
     },
     'building-3': (x, y) => {
@@ -41,7 +42,7 @@ const assets = {
         mesh.scale.set(1, height, 1);
         mesh.castShadow = true;
 
-        mesh.userData = {'id': 'building-3'};
+        mesh.userData = {'id': 'building-3', x, y};
         return mesh;
     },
 }
