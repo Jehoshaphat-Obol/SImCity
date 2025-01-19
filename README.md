@@ -1,10 +1,9 @@
 # What's new?
-- added shadows
-- added self building generation
+- Asset factory
 ---
 
 # What's changed?
-- limited orbit controls
+- scene update cycle is optimized
 ---
 
 # What's removed?

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { createAsset } from './assets.js';
 
 export function createScene() {
     // initial scene setup
@@ -9,8 +10,12 @@ export function createScene() {
     scene.add(new THREE.AxesHelper(4));
 
     const camera = new THREE.PerspectiveCamera(75, gameWindow.offsetWidth / gameWindow.offsetHeight, 0.1, 1000);
-    camera.position.set(9, 9, 9);
-
+    
+    camera.position.set(20,11, 0);
+    
+    const initialLookAt = new THREE.Vector3(10, 1, 10); 
+    camera.lookAt(initialLookAt)
+    
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(gameWindow.offsetWidth, gameWindow.offsetHeight);
     gameWindow.appendChild(renderer.domElement);
@@ -37,46 +42,42 @@ export function createScene() {
         scene.clear();
         terrain = [];
         buildings = [];
-
         setUpLights();
         for (let x = 0; x < city.size; x++) {
             let column = []
             for (let y = 0; y < city.size; y++) {
-                const terrainGeometry = new THREE.BoxGeometry(1, 1, 1);
-                const terrainMaterial = new THREE.MeshLambertMaterial({ color: 0x00AA00 });
-                const terrainMesh = new THREE.Mesh(terrainGeometry, terrainMaterial);
-                terrainMesh.position.set(x, -0.5, y);
-
-                terrainMesh.receiveShadow = true;
-                scene.add(terrainMesh);
-                column.push(terrainMesh);
+                let grass = createAsset('grass', x, y);
+                scene.add(grass);
+                column.push(grass);
             }
 
             terrain.push(column);
             buildings.push([...Array(city.size)]);
         }
+
     }
 
     function update(city) {
         for (let x = 0; x < city.size; x++) {
             for (let y = 0; y < city.size; y++) {
-                const building = city.data[x][y].building;
-                if (building && building.startsWith('building')){
-                    const height = Number(building.slice(-1));
-                    const geo = new THREE.BoxGeometry(1, height, 1);
-                    const mat = new THREE.MeshLambertMaterial({ color: 0x777777 });
-                    const mesh = new THREE.Mesh(geo, mat);
-                    mesh.position.set(x, height / 2, y);
-                    mesh.castShadow = true;
+                const currentBuilding = buildings[x][y]?.userData.id;
+                const newBuilding = city.data[x][y].buildingId;
 
-                    if(buildings[x][y]){
-                        scene.remove(buildings[x][y]);
-                    }
-
-                    scene.add(mesh);
-                    buildings[x][y] = mesh;
+                // if player removes a building from city model, remove from the scene
+                if(!newBuilding && currentBuilding){
+                    scene.remove(buildings[x][y]);
+                    buildings[x][y] = undefined;
                 }
-                
+
+                // if the city data model is updated, update the mesh
+                if(newBuilding !== currentBuilding){
+                    let mesh = createAsset(newBuilding, x, y);
+                    
+                    scene.remove(buildings[x][y]);
+                    buildings[x][y] = mesh;
+
+                    scene.add(buildings[x][y]);
+                }
             }
 
         }
@@ -84,7 +85,6 @@ export function createScene() {
 
     function setUpLights() {
         const lightings = [
-            null,
             new THREE.AmbientLight(0xFFFFFF, 0.3),
             new THREE.DirectionalLight(0xffffff, 0.3),
             new THREE.DirectionalLight(0xffffff, 0.3),
