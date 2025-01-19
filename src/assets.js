@@ -13,7 +13,7 @@ const assets = {
     },
     'building-1': (x, y) => {
         const height = 1;
-        const mat = new THREE.MeshLambertMaterial({ color: 0x777777 });
+        const mat = new THREE.MeshLambertMaterial({ color: 0xFFFF00 });
         const mesh = new THREE.Mesh(geometry, mat);
         mesh.position.set(x, height / 2, y);
         mesh.scale.set(1, height, 1);
@@ -24,7 +24,7 @@ const assets = {
     },
     'building-2': (x, y) => {
         const height = 2;
-        const mat = new THREE.MeshLambertMaterial({ color: 0x777777 });
+        const mat = new THREE.MeshLambertMaterial({ color: 0x00FFFF });
         const mesh = new THREE.Mesh(geometry, mat);
         mesh.position.set(x, height / 2, y);
         mesh.scale.set(1, height, 1);
@@ -36,7 +36,7 @@ const assets = {
     },
     'building-3': (x, y) => {
         const height = 3;
-        const mat = new THREE.MeshLambertMaterial({ color: 0x777777 });
+        const mat = new THREE.MeshLambertMaterial({ color: 0xFF00FF });
         const mesh = new THREE.Mesh(geometry, mat);
         mesh.position.set(x, height / 2, y);
         mesh.scale.set(1, height, 1);

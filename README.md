@@ -1,9 +1,9 @@
 # What's new?
--Selectable objects with mouse
+
 ---
 
 # What's changed?
-
+- city building colors
 ---
 
 # What's removed?
