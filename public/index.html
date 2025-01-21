@@ -19,15 +19,33 @@
 <body>
     <div id="root-window">
         <div id="render-target">
-
+<div id="ui-toolbar">
+  <button onclick="setActiveTool(event, 'bulldoze')" id="button-bulldoze" class="ui-button selected">BULLDOZE</button>
+  <button onclick="setActiveTool(event, 'residential')" id="button-residential" class="ui-button">RESIDENTIAL</button>
+  <button onclick="setActiveTool(event, 'commercial')" id="button-commercial" class="ui-button">COMMERCIAL</button>
+  <button onclick="setActiveTool(event, 'industrial')" id="button-industrial" class="ui-button">INDUSTRIAL</button>
+  <button onclick="setActiveTool(event, 'road')" id="button-road" class="ui-button">ROAD</button>
+</div>
         </div>
     </div>
 
     <script type="module">
         import {createGame} from '../src/game.js';
+      let selectedTool = document.getElementById("button-bulldoze");
 
-        window.onload = () => {
-            createGame();
+      window.onload = () => {
+           window.game = createGame();
+        }
+
+        window.setActiveTool = (event, toolId)  => {
+          if(selectedTool){
+            selectedTool.classList.remove('selected');
+          }
+
+          selectedTool = event.target;
+          selectedTool.classList.add('selected');
+
+          window.game.setActiveToolId(toolId);
         }
     </script>
 </body>

@@ -4,4 +4,31 @@ html, body, #root-window, #render-target {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    position: relative;
+}
+
+#ui-toolbar{
+    position:absolute;
+    width: 150px;
+    height: 100vh;
+    padding: 16px;
+    background: #00000033;
+}
+
+.ui-button {
+    background: #00000055;
+    border: 1px solid black;
+    color: lightgray;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    margin: 4px 0px;
+}
+
+.ui-button.selected {
+    background: #55558855;
+}
+
+.ui-button:not(.selected):hover{
+background: #33333355;
 }

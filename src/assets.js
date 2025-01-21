@@ -11,7 +11,7 @@ const assets = {
         mesh.userData = {'id': 'grass', x, y};
         return mesh;
     },
-    'building-1': (x, y) => {
+    'residential': (x, y) => {
         const height = 1;
         const mat = new THREE.MeshLambertMaterial({ color: 0xbbbb55 });
         const mesh = new THREE.Mesh(geometry, mat);
@@ -19,30 +19,41 @@ const assets = {
         mesh.scale.set(1, height, 1);
         mesh.castShadow = true;
 
-        mesh.userData = {'id': 'building-1', x, y};
+        mesh.userData = {'id': 'residential', x, y};
         return mesh;
     },
-    'building-2': (x, y) => {
-        const height = 2;
+    'commercial': (x, y) => {
+        const height = 1;
         const mat = new THREE.MeshLambertMaterial({ color: 0xbb5555 });
         const mesh = new THREE.Mesh(geometry, mat);
         mesh.position.set(x, height / 2, y);
         mesh.scale.set(1, height, 1);
         mesh.castShadow = true;
 
-        mesh.userData = {'id': 'building-2', x, y};
+        mesh.userData = {'id': 'commercial', x, y};
 
         return mesh;
     },
-    'building-3': (x, y) => {
-        const height = 3;
+    'industrial': (x, y) => {
+        const height = 1;
         const mat = new THREE.MeshLambertMaterial({ color: 0x5555bb });
         const mesh = new THREE.Mesh(geometry, mat);
         mesh.position.set(x, height / 2, y);
         mesh.scale.set(1, height, 1);
         mesh.castShadow = true;
 
-        mesh.userData = {'id': 'building-3', x, y};
+        mesh.userData = {'id': 'industrial', x, y};
+        return mesh;
+    },
+    'road': (x, y) => {
+        const height = 0.1;
+        const mat = new THREE.MeshLambertMaterial({ color: 0x5555bb });
+        const mesh = new THREE.Mesh(geometry, mat);
+        mesh.position.set(x, height / 2, y);
+        mesh.scale.set(1, height, 1);
+        mesh.castShadow = true;
+
+        mesh.userData = {'id': 'industrial', x, y};
         return mesh;
     },
 }

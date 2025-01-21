@@ -1,9 +1,9 @@
 # What's new?
-
+- working toolbar
 ---
 
 # What's changed?
-- city building colors
+- asset factory
 ---
 
 # What's removed?

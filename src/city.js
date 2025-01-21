@@ -16,27 +16,12 @@ export function createCity(size) {
         }
     }
 
-        
-    function update() {
-        for (let x = 0; x < size; x++) {
-            for (let y = 0; y < size; y++) {
-                let tile = data[x][y];
-                if(Math.random() < 0.01){
-                    if(tile.buildingId == undefined){
-                        tile.buildingId = 'building-1';
-                    }else if(tile.buildingId == 'building-1'){
-                        tile.buildingId = 'building-2';
-                    }else if(tile.buildingId == 'building-2'){
-                        tile.buildingId = 'building-3';
-                    }
-                }
 
-                data[x][y] = tile;
-            }
-        }
+    function update() {
+
     }
 
-    function createTile(x, y){
+    function createTile(x, y) {
         return {
             x,
             y,
@@ -44,7 +29,7 @@ export function createCity(size) {
             terrainId: 'grass',
         };
     }
-    
+
     return {
         size,
         data,
